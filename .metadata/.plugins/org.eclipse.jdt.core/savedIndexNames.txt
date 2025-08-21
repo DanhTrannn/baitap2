@@ -1,2 +1,0 @@
-INDEX VERSION 1.131+D:\Hocky1-nam 3\web\.metadata\.plugins\org.eclipse.jdt.core
-2507060314.index
