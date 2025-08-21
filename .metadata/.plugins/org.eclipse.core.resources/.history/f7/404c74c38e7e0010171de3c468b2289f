@@ -1,0 +1,5 @@
+package com.baitap2.model;
+
+public abstract class AbstractModel {
+
+}

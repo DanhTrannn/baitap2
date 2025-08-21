@@ -1,0 +1,5 @@
+package com.baitap2.controller.web;
+
+public class HomeController {
+
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+  <display-name>JSP Servlet Starter</display-name>
+
+  <!-- DB config -->
+  <context-param>
+    <param-name>db.url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/jspapp?useSSL=false&amp;serverTimezone=UTC</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.user</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.password</param-name>
+    <param-value>password</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>com.example.app.config.AppContextListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>AuthServlet</servlet-name>
+    <servlet-class>com.example.app.web.AuthServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/app/login</url-pattern>
+    <url-pattern>/app/register</url-pattern>
+    <url-pattern>/app/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>com.example.app.web.ProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/app/products</url-pattern>
+    <url-pattern>/app/product/new</url-pattern>
+    <url-pattern>/app/product/edit</url-pattern>
+    <url-pattern>/app/product/delete</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>com.example.app.web.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/app/*</url-pattern>
+  </filter-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
