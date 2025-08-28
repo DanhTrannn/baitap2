@@ -12,32 +12,38 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.baitap2.model.User;
 public class EmailListServlet extends HttpServlet {
+
+    /**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	 @Override
-	    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-	            throws ServletException, IOException {
-	        doPost(req, resp);
-	    }
 
-	    @Override
-	    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	    	String url = "/index.jsp";
-	        String action = request.getParameter("action");
-	        if (action == null) action = "join";
+	@Override
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+		// Lấy dữ liệu từ form
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        String birth = request.getParameter("birth");
+        String heardFrom = request.getParameter("heardFrom");
+        String wantsUpdates = request.getParameter("wantsUpdates") != null ? "Yes" : "No";
+        String emailOK = request.getParameter("emailOK") != null ? "Yes" : "No";
+        String contactVia = request.getParameter("contactVia");
 
-	        if (action.equals("join")) {
-	            url = "/index.jsp";
-	        } else if (action.equals("add")) {
-	            String email = request.getParameter("email");
-	            String firstName = request.getParameter("firstName");
-	            String lastName = request.getParameter("lastName");
-	            User user = new User(email, firstName, lastName);
-	            request.setAttribute("user", user);
-	            url = "/thank.jsp";
-	        }
-	        getServletContext()
-	            .getRequestDispatcher(url)
-	            .forward(request, response);
-	    }
+        // Gửi dữ liệu tới JSP qua request attribute
+        request.setAttribute("firstName", firstName);
+        request.setAttribute("lastName", lastName);
+        request.setAttribute("email", email);
+        request.setAttribute("birth", birth);
+        request.setAttribute("heardFrom", heardFrom);
+        request.setAttribute("wantsUpdates", wantsUpdates);
+        request.setAttribute("emailOK", emailOK);
+        request.setAttribute("contactVia", contactVia);
+
+        // Chuyển hướng tới trang cảm ơn
+        RequestDispatcher dispatcher = request.getRequestDispatcher("thank.jsp");
+        dispatcher.forward(request, response);
+    }
 }
